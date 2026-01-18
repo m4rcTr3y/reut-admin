@@ -42,48 +42,6 @@ $adminController->register();
 $app->run();
 ```
 
-2. **Create the admin_users table** by running migrations or manually:
-
-```sql
-CREATE TABLE IF NOT EXISTS admin_users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(100) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    role VARCHAR(50) NOT NULL DEFAULT 'admin',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-```
-
-3. **Build the React admin UI**:
-
-```bash
-cd vendor/m4rc/reut-admin/admin-ui
-npm install
-npm run build
-```
-
-The build output will be copied to `vendor/m4rc/reut-admin/assets/`.
-
-## Usage
-
-1. Navigate to `/admin` in your browser
-2. Register your first admin user
-3. Start managing your Reut application!
-
-## Development
-
-To develop the admin UI:
-
-```bash
-cd admin-ui
-npm install
-npm run dev
-```
-
-The UI will be available at the development server URL.
-
 ## API Endpoints
 
 All admin API endpoints are prefixed with `/admin/api/`:
