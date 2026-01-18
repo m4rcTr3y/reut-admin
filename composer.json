@@ -1,0 +1,33 @@
+{
+    "name": "m4rc/reut-admin",
+    "description": "Admin dashboard package for REUT framework - Comprehensive admin interface with React UI",
+    "type": "library",
+    "version": "1.0.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "m4rcTr3y",
+            "email": "marctrevis61@proton.me"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "reut/core": "^1.4",
+        "firebase/php-jwt": "^6.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Reut\\Admin\\": "src/"
+        }
+    },
+    "bin": [
+        "bin/admin-setup.php"
+    ],
+    "keywords": ["reut", "framework", "admin", "dashboard", "ui"],
+    "homepage": "https://github.com/m4rcTr3y/Reut-Admin",
+    "support": {
+        "email": "marctrevis61@proton.me",
+        "issues": "https://github.com/m4rcTr3y/Reut-Admin/issues"
+    }
+}
+

@@ -1,0 +1,21 @@
+/vendor/
+/node_modules/
+/admin-ui/
+/assets/*
+!/assets/.gitkeep
+*.log
+.DS_Store
+
+# Exclude markdown files except README.md
+ENV_CONFIG.md
+README_SETUP.md
+SCHEMA_VS_MODELS.md
+SECURITY.md
+SETUP.md
+TESTING.md
+
+# Exclude migrations folder
+/migrations/
+
+
+
