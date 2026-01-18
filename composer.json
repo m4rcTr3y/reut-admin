@@ -24,10 +24,16 @@
         "bin/admin-setup.php"
     ],
     "keywords": ["reut", "framework", "admin", "dashboard", "ui"],
-    "homepage": "https://github.com/m4rcTr3y/Reut-Admin",
+    "homepage": "https://github.com/m4rcTr3y/reut-admin",
     "support": {
         "email": "marctrevis61@proton.me",
-        "issues": "https://github.com/m4rcTr3y/Reut-Admin/issues"
-    }
+        "issues": "https://github.com/m4rcTr3y/reut-admin/issues"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/m4rcTr3y/reut-admin.git"
+        }
+    ]
 }
 
