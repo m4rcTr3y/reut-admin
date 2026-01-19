@@ -428,21 +428,63 @@ class AdminSetupCommand
     private function promptPassword(string $message): string
     {
         echo $message;
+        flush();
         
         // Try to hide password input
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             // Windows
             $exe = __DIR__ . '/../../bin/hideinput.exe';
-            $value = rtrim(shell_exec($exe) ?: '');
+            if (file_exists($exe)) {
+                $value = rtrim(shell_exec($exe) ?: '');
+            } else {
+                // Fallback: read without hiding (Windows)
+                $handle = fopen("php://stdin", "r");
+                $line = fgets($handle);
+                fclose($handle);
+                $value = $line !== false ? trim($line) : '';
+            }
         } else {
             // Unix/Linux/Mac
-            system('stty -echo');
-            $handle = fopen("php://stdin", "r");
-            $line = fgets($handle);
-            fclose($handle);
-            system('stty echo');
-            echo "\n";
-            $value = $line !== false ? trim($line) : '';
+            // Check if we're in an interactive terminal
+            $isInteractive = function_exists('posix_isatty') && posix_isatty(STDIN);
+            
+            if ($isInteractive) {
+                // Save current terminal settings
+                $sttyMode = @shell_exec('stty -g 2>/dev/null');
+                
+                // Disable echo
+                @system('stty -echo 2>/dev/null');
+                
+                // Read password
+                $handle = fopen("php://stdin", "r");
+                if ($handle === false) {
+                    // Fallback if fopen fails
+                    $value = '';
+                } else {
+                    $line = fgets($handle);
+                    fclose($handle);
+                    $value = $line !== false ? trim($line) : '';
+                }
+                
+                // Always restore terminal settings
+                if ($sttyMode) {
+                    @system("stty {$sttyMode} 2>/dev/null");
+                } else {
+                    @system('stty echo 2>/dev/null');
+                }
+                
+                echo "\n";
+            } else {
+                // Not an interactive terminal or posix functions not available, read normally
+                $handle = fopen("php://stdin", "r");
+                if ($handle === false) {
+                    $value = '';
+                } else {
+                    $line = fgets($handle);
+                    fclose($handle);
+                    $value = $line !== false ? trim($line) : '';
+                }
+            }
         }
         
         return $value;
