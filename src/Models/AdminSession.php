@@ -7,6 +7,7 @@ use Reut\DB\DataBase;
 use Reut\DB\Types\Varchar;
 use Reut\DB\Types\Integer;
 use Reut\DB\Types\Timestamp;
+use Reut\DB\Types\DateTimeType;
 
 /**
  * AdminSession Model
@@ -78,9 +79,10 @@ class AdminSession extends DataBase
             true   // DEFAULT CURRENT_TIMESTAMP
         ));
 
-        $this->addColumn('expires_at', new Timestamp(
+        // Use DATETIME instead of TIMESTAMP for nullable columns to avoid MySQL restrictions
+        $this->addColumn('expires_at', new DateTimeType(
             true,   // Nullable (expiration is optional)
-            false   // No default (set when session is created)
+            null    // No default (set when session is created)
         ));
     }
 }

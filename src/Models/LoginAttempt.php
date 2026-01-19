@@ -7,6 +7,7 @@ use Reut\DB\DataBase;
 use Reut\DB\Types\Varchar;
 use Reut\DB\Types\Integer;
 use Reut\DB\Types\Timestamp;
+use Reut\DB\Types\DateTimeType;
 
 /**
  * LoginAttempt Model
@@ -56,9 +57,10 @@ class LoginAttempt extends DataBase
             1
         ));
 
-        $this->addColumn('locked_until', new Timestamp(
-            true,
-            false
+        // Use DATETIME instead of TIMESTAMP for nullable columns to avoid MySQL restrictions
+        $this->addColumn('locked_until', new DateTimeType(
+            true,   // Nullable
+            null    // No default
         ));
 
         $this->addColumn('created_at', new Timestamp(

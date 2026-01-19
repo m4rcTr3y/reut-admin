@@ -7,6 +7,7 @@ use Reut\DB\DataBase;
 use Reut\DB\Types\Varchar;
 use Reut\DB\Types\Integer;
 use Reut\DB\Types\Timestamp;
+use Reut\DB\Types\DateTimeType;
 use Reut\DB\Types\Text;
 
 /**
@@ -78,14 +79,15 @@ class ApiKey extends DataBase
             1
         ));
 
-        $this->addColumn('last_used_at', new Timestamp(
-            true,
-            false
+        // Use DATETIME instead of TIMESTAMP for nullable columns to avoid MySQL restrictions
+        $this->addColumn('last_used_at', new DateTimeType(
+            true,   // Nullable
+            null    // No default
         ));
 
-        $this->addColumn('expires_at', new Timestamp(
-            true,
-            false
+        $this->addColumn('expires_at', new DateTimeType(
+            true,   // Nullable
+            null    // No default
         ));
 
         $this->addColumn('created_at', new Timestamp(
