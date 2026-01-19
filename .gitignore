@@ -1,8 +1,8 @@
 /vendor/
 /node_modules/
 /admin-ui/
-/assets/*
-!/assets/.gitkeep
+/admin-ui/dist/
+/admin-ui/node_modules/
 *.log
 .DS_Store
 
