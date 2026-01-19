@@ -70,12 +70,12 @@ class AdminSession extends DataBase
 
         $this->addColumn('created_at', new Timestamp(
             false,
-            false
+            true   // DEFAULT CURRENT_TIMESTAMP
         ));
 
         $this->addColumn('last_activity', new Timestamp(
             false,
-            false
+            true   // DEFAULT CURRENT_TIMESTAMP
         ));
 
         $this->addColumn('expires_at', new Timestamp(

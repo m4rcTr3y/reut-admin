@@ -91,12 +91,13 @@ class FunctionModel extends DataBase
         // Timestamps
         $this->addColumn('created_at', new Timestamp(
             false,
-            false
+            true   // DEFAULT CURRENT_TIMESTAMP
         ));
 
         $this->addColumn('updated_at', new Timestamp(
             false,
-            false
+            true,  // DEFAULT CURRENT_TIMESTAMP
+            true   // ON UPDATE CURRENT_TIMESTAMP
         ));
     }
 }

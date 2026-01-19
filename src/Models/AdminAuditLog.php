@@ -76,7 +76,7 @@ class AdminAuditLog extends DataBase
 
         $this->addColumn('created_at', new Timestamp(
             false,
-            false
+            true   // DEFAULT CURRENT_TIMESTAMP
         ));
     }
 }
