@@ -2,7 +2,7 @@
     "name": "m4rc/reut-admin",
     "description": "Admin dashboard package for REUT framework - Comprehensive admin interface with React UI",
     "type": "library",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "license": "MIT",
     "authors": [
         {
