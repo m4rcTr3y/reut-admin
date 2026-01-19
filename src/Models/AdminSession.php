@@ -79,8 +79,8 @@ class AdminSession extends DataBase
         ));
 
         $this->addColumn('expires_at', new Timestamp(
-            false,
-            true
+            true,   // Nullable (expiration is optional)
+            false   // No default (set when session is created)
         ));
     }
 }
