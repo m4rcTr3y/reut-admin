@@ -58,11 +58,11 @@ class ApiKey extends DataBase
         ));
 
         $this->addColumn('permissions', new Text(
-            false
+            false,
         ));
 
         $this->addColumn('allowed_ips', new Text(
-            true
+            false
         ));
 
         $this->addColumn('rate_limit', new Integer(

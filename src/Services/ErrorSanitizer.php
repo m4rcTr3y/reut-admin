@@ -39,7 +39,7 @@ class ErrorSanitizer
         
         // Remove SQL error details
         if (preg_match('/SQLSTATE|PDOException|SQL syntax/i', $message)) {
-            return 'A database error occurred. Please try again or contact support.';
+            return 'DatabaseError: '.$message;
         }
         
         // Remove class names that might leak structure

@@ -10,6 +10,7 @@ use Reut\Admin\Models\AdminAuditLog;
 use Reut\Admin\Models\LoginAttempt;
 use Reut\Admin\Models\ApiKey;
 use Reut\Admin\Models\FunctionModel;
+use Reut\Admin\Models\Sessions;
 use Reut\DB\DataBase;
 use Reut\Support\ProjectPath;
 
@@ -82,6 +83,12 @@ class AdminSetupCommand
             $this->createFunctionsTable();
             echo "[OK] functions table created successfully\n\n";
 
+            // Step 8: Create api_keys table
+            echo "Step 2.6: Creating sessions table...\n";
+            $this->createSessionsTable();
+            echo "[OK] sessions table created successfully\n\n";
+
+
             // Step 3: Prompt for admin user credentials
             echo "Step 3: Create admin user\n";
             echo "----------------------------\n";
@@ -102,6 +109,7 @@ class AdminSetupCommand
             // Step 7: Create functions directory
             echo "\nStep 7: Creating functions directory...\n";
             $this->createFunctionsDirectory();
+
 
             echo "\n[OK] Admin dashboard setup completed successfully!\n";
             echo "\nYou can now access the admin dashboard at: /admin\n";
@@ -276,6 +284,23 @@ class AdminSetupCommand
             } else {
                 echo "   [WARNING] Could not add index on is_active: " . $errorMsg . "\n";
             }
+        }
+    }
+
+       private function createSessionsTable(): void
+    {
+        $adminUser = new Sessions($this->config);
+        $adminUser->connect();
+        
+        // Check if table already exists
+        if ($adminUser->tableExists('sessions')) {
+            echo "[WARNING] sessions table already exists, skipping...\n";
+            return;
+        }
+
+        // Create the table
+        if (!$adminUser->createTable()) {
+            throw new \Exception("Failed to create sessions table");
         }
     }
 

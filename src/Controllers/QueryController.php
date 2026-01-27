@@ -180,14 +180,16 @@ class QueryController
 
     public function executeQuery(Request $request, Response $response): Response
     {
-        $data = json_decode($request->getBody()->getContents(), true);
+        $data = $request->getParsedBody();
+        // $data = $request->getQueryParams();
         $query = $data['query'] ?? '';
         $params = $data['params'] ?? [];
 
         if (empty($query)) {
             $response->getBody()->write(json_encode([
                 'success' => false,
-                'error' => 'Query is required'
+                'error' => 'Query is required ',
+                'query'=>$query
             ], JSON_UNESCAPED_SLASHES));
             return $response->withStatus(400)->withHeader('Content-Type', 'application/json; charset=utf-8');
         }
